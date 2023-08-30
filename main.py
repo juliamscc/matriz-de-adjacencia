@@ -1,20 +1,46 @@
-import networkx as nx
-G = nx.Graph()
+# Leitura do arquivo .txt
+with open("graph.txt", "r") as arquivo:
+	text = arquivo.read()
 
-G.add_node('a')
-G.add_node('b')
-G.add_node('c')
-G.add_node('d')
-G.add_node('e')
+# Função para criar a lista de vértices
+def createListOfNodes(graph):
+	nodes = graph[0].split(' ')
+	return nodes
 
-print(G.nodes())
+# Função para criar a lista de arestas
+def createListOfEdges(graph):
+	listofedges = graph[1:]
+	edges = []
+	for i in listofedges:
+		e = i.split(' ')
+		edge = tuple(e)
+		edges.append(edge)
+	return edges
 
-G.add_edge('a','b')
-G.add_edge('a','e')
-G.add_edge('b','c')
-G.add_edge('c','c')
+graph = text.split('\n')
 
-nVertices = G.number_of_nodes()
-nArestas = G.number_of_edges()
+nodes = createListOfNodes(graph)
+edges = createListOfEdges(graph)
 
-print('vertices: ', nVertices, '\narestas: ', nArestas)
+# Função para criar a matriz de adjacência
+def adjacency_matrix(nodes, edges):
+    matrix = []
+    line = []
+    i = 0
+    j = 0
+
+    while i < len(nodes):
+        while j < len(nodes):
+            if ((nodes[i], nodes[j]) in edges or (nodes[j], nodes[i]) in edges):
+                line.append(1)
+            else:
+                line.append(0)
+            j += 1
+        matrix.append(line)
+        line = []
+        i += 1
+        j = 0
+
+    return matrix
+
+print(adjacency_matrix(nodes, edges))

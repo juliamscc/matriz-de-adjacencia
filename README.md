@@ -17,5 +17,3 @@ Altere o conteúdo do arquivo <strong>graph.txt</strong> para os dados do novo g
 Adicione os vértices do grafo na primeira linha separando-os com espaços.
 <br>
 A cada nova linha, insira dois vértices, separados por espaço, para adicionar uma aresta.
-<br>
-Execute o arquivo main.py
